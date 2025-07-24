@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { GraduationCap, Award, MapPin, Code, BookOpen, Sparkles } from "lucide-react";
+import profileImage from "@/assets/sai-sampath-profile.jpg";
 
 const About = () => {
   const education = [
@@ -61,10 +62,12 @@ const About = () => {
             <div className="relative group">
               <div className="absolute -inset-4 bg-gradient-primary rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity"></div>
               <div className="relative w-80 h-80 mx-auto lg:mx-0 rounded-3xl bg-gradient-card border border-border/50 overflow-hidden">
+                <img 
+                  src={profileImage} 
+                  alt="Sai Sampath" 
+                  className="w-full h-full object-cover"
+                />
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20"></div>
-                <div className="w-full h-full flex items-center justify-center relative z-10">
-                  <span className="text-7xl font-bold text-primary drop-shadow-lg">SS</span>
-                </div>
                 {/* Floating Elements */}
                 <div className="absolute top-4 right-4 w-8 h-8 bg-primary/20 rounded-full blur-sm animate-pulse"></div>
                 <div className="absolute bottom-6 left-6 w-6 h-6 bg-accent/30 rounded-full blur-sm animate-pulse delay-100"></div>
