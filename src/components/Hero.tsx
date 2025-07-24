@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ChevronDown, Download, ExternalLink, Code, Brain, Trophy, Star } from "lucide-react";
+import profileImage from "@/assets/sai-sampath-profile.jpg";
 
 const Hero = () => {
   return (
@@ -92,15 +93,17 @@ const Hero = () => {
               {/* Main Profile Container */}
               <div className="relative max-w-md mx-auto">
                 {/* Profile Image with Enhanced Effects */}
-                <div className="relative w-80 h-80 mx-auto mb-8">
-                  <div className="absolute inset-0 bg-gradient-primary rounded-3xl blur-xl opacity-30 animate-pulse"></div>
-                  <div className="relative w-full h-full rounded-3xl bg-gradient-card border-2 border-primary/20 overflow-hidden">
-                    <div className="w-full h-full bg-muted flex items-center justify-center">
-                      <span className="text-6xl font-bold text-primary">SS</span>
+                  <div className="relative w-80 h-80 mx-auto mb-8">
+                    <div className="absolute inset-0 bg-gradient-primary rounded-3xl blur-xl opacity-30 animate-pulse"></div>
+                    <div className="relative w-full h-full rounded-3xl bg-gradient-card border-2 border-primary/20 overflow-hidden">
+                      <img 
+                        src={profileImage} 
+                        alt="Sai Sampath" 
+                        className="w-full h-full object-cover"
+                      />
+                      {/* Overlay pattern */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent"></div>
                     </div>
-                    {/* Overlay pattern */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent"></div>
-                  </div>
                   
                   {/* Floating Action Buttons */}
                   <div className="absolute -right-4 top-1/4 space-y-3">
