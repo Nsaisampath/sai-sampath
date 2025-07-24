@@ -3,9 +3,47 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { useToast } from "@/components/ui/use-toast";
 import { Mail, Phone, Linkedin, Github, MapPin, Send, ExternalLink } from "lucide-react";
+import emailjs from '@emailjs/browser';
+import { useState, useRef } from 'react';
 
 const Contact = () => {
+  const { toast } = useToast();
+  const formRef = useRef<HTMLFormElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const sendEmail = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+
+    setIsSubmitting(true);
+    
+    try {
+      await emailjs.sendForm(
+        'service_hb0mx24',
+        'template_f9yb9mt',
+        formRef.current,
+        'eN3I03Sf2F26KKcLm'
+      );
+      
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for reaching out. I'll get back to you soon.",
+      });
+      
+      formRef.current.reset();
+    } catch (error) {
+      toast({
+        title: "Failed to send message",
+        description: "Please try again or contact me directly via email.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const contactInfo = [
     {
       icon: <Mail className="w-6 h-6" />,
@@ -112,23 +150,27 @@ const Contact = () => {
                 <h3 className="text-3xl font-bold mb-2">Send a Message</h3>
                 <p className="text-muted-foreground mb-8">I'd love to hear about your project or opportunity.</p>
                 
-                <form className="space-y-8">
+                <form ref={formRef} onSubmit={sendEmail} className="space-y-8">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-3">
-                      <Label htmlFor="name" className="text-sm font-semibold">Name *</Label>
+                      <Label htmlFor="user_name" className="text-sm font-semibold">Name *</Label>
                       <Input
-                        id="name"
+                        id="user_name"
+                        name="user_name"
                         placeholder="Your full name"
                         className="bg-background/50 border-border focus:border-primary focus:bg-background h-12 text-lg"
+                        required
                       />
                     </div>
                     <div className="space-y-3">
-                      <Label htmlFor="email" className="text-sm font-semibold">Email *</Label>
+                      <Label htmlFor="user_email" className="text-sm font-semibold">Email *</Label>
                       <Input
-                        id="email"
+                        id="user_email"
+                        name="user_email"
                         type="email"
                         placeholder="your.email@example.com"
                         className="bg-background/50 border-border focus:border-primary focus:bg-background h-12 text-lg"
+                        required
                       />
                     </div>
                   </div>
@@ -137,8 +179,10 @@ const Contact = () => {
                     <Label htmlFor="subject" className="text-sm font-semibold">Subject *</Label>
                     <Input
                       id="subject"
+                      name="subject"
                       placeholder="What would you like to discuss?"
                       className="bg-background/50 border-border focus:border-primary focus:bg-background h-12 text-lg"
+                      required
                     />
                   </div>
                   
@@ -146,15 +190,21 @@ const Contact = () => {
                     <Label htmlFor="message" className="text-sm font-semibold">Message *</Label>
                     <Textarea
                       id="message"
+                      name="message"
                       placeholder="Tell me about your project, collaboration idea, or just say hello..."
                       rows={6}
                       className="bg-background/50 border-border focus:border-primary focus:bg-background resize-none text-lg"
+                      required
                     />
                   </div>
                   
-                  <Button className="w-full btn-primary h-14 text-lg group">
-                    <Send className="w-5 h-5 mr-3 group-hover:translate-x-1 transition-transform" />
-                    Send Message
+                  <Button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="w-full btn-primary h-14 text-lg group"
+                  >
+                    <Send className={`w-5 h-5 mr-3 transition-transform ${isSubmitting ? 'animate-pulse' : 'group-hover:translate-x-1'}`} />
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                   </Button>
                 </form>
               </div>
