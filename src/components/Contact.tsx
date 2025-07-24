@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, Linkedin, Github, MapPin, Send } from "lucide-react";
+import { Mail, Phone, Linkedin, Github, MapPin, Send, ExternalLink } from "lucide-react";
 
 const Contact = () => {
   const contactInfo = [
@@ -60,19 +60,29 @@ const Contact = () => {
               </p>
             </div>
 
-            {/* Contact Methods */}
-            <div className="space-y-4">
+            {/* Enhanced Contact Methods */}
+            <div className="space-y-6">
               {contactInfo.map((contact, index) => (
-                <Card key={index} className="p-4 bg-gradient-card border-border card-hover">
-                  <a href={contact.href} className="flex items-center space-x-4 group">
-                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${contact.gradient} flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform`}>
-                      {contact.icon}
+                <Card key={index} className="relative p-6 bg-gradient-card border-border card-hover group overflow-hidden">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${contact.gradient} opacity-5 group-hover:opacity-10 transition-opacity`}></div>
+                  
+                  <a href={contact.href} className="flex items-center space-x-6 group relative z-10">
+                    <div className="relative">
+                      <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${contact.gradient} flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition-transform`}>
+                        {contact.icon}
+                      </div>
+                      <div className={`absolute -inset-2 bg-gradient-to-br ${contact.gradient} rounded-2xl opacity-20 blur-lg group-hover:opacity-40 transition-opacity`}></div>
                     </div>
-                    <div>
-                      <div className="font-semibold">{contact.label}</div>
-                      <div className="text-primary hover:text-primary-glow transition-colors">
+                    
+                    <div className="flex-1">
+                      <div className="font-semibold text-lg mb-1">{contact.label}</div>
+                      <div className="text-primary hover:text-primary-glow transition-colors font-medium">
                         {contact.value}
                       </div>
+                    </div>
+                    
+                    <div className="text-muted-foreground group-hover:text-primary transition-colors">
+                      <ExternalLink className="w-5 h-5" />
                     </div>
                   </a>
                 </Card>
@@ -93,55 +103,61 @@ const Contact = () => {
             </Card>
           </div>
 
-          {/* Contact Form */}
+          {/* Enhanced Contact Form */}
           <div>
-            <Card className="p-8 bg-gradient-card border-border">
-              <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
-              <form className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Name</Label>
+            <Card className="relative p-10 bg-gradient-card border-border overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-primary opacity-5 rounded-full blur-3xl"></div>
+              
+              <div className="relative z-10">
+                <h3 className="text-3xl font-bold mb-2">Send a Message</h3>
+                <p className="text-muted-foreground mb-8">I'd love to hear about your project or opportunity.</p>
+                
+                <form className="space-y-8">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-3">
+                      <Label htmlFor="name" className="text-sm font-semibold">Name *</Label>
+                      <Input
+                        id="name"
+                        placeholder="Your full name"
+                        className="bg-background/50 border-border focus:border-primary focus:bg-background h-12 text-lg"
+                      />
+                    </div>
+                    <div className="space-y-3">
+                      <Label htmlFor="email" className="text-sm font-semibold">Email *</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        placeholder="your.email@example.com"
+                        className="bg-background/50 border-border focus:border-primary focus:bg-background h-12 text-lg"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <Label htmlFor="subject" className="text-sm font-semibold">Subject *</Label>
                     <Input
-                      id="name"
-                      placeholder="Your name"
-                      className="bg-background border-border focus:border-primary"
+                      id="subject"
+                      placeholder="What would you like to discuss?"
+                      className="bg-background/50 border-border focus:border-primary focus:bg-background h-12 text-lg"
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="your.email@example.com"
-                      className="bg-background border-border focus:border-primary"
+                  
+                  <div className="space-y-3">
+                    <Label htmlFor="message" className="text-sm font-semibold">Message *</Label>
+                    <Textarea
+                      id="message"
+                      placeholder="Tell me about your project, collaboration idea, or just say hello..."
+                      rows={6}
+                      className="bg-background/50 border-border focus:border-primary focus:bg-background resize-none text-lg"
                     />
                   </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="subject">Subject</Label>
-                  <Input
-                    id="subject"
-                    placeholder="What's this about?"
-                    className="bg-background border-border focus:border-primary"
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea
-                    id="message"
-                    placeholder="Tell me about your project or just say hello..."
-                    rows={6}
-                    className="bg-background border-border focus:border-primary resize-none"
-                  />
-                </div>
-                
-                <Button className="w-full btn-primary">
-                  <Send className="w-5 h-5 mr-2" />
-                  Send Message
-                </Button>
-              </form>
+                  
+                  <Button className="w-full btn-primary h-14 text-lg group">
+                    <Send className="w-5 h-5 mr-3 group-hover:translate-x-1 transition-transform" />
+                    Send Message
+                  </Button>
+                </form>
+              </div>
             </Card>
           </div>
         </div>

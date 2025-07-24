@@ -42,57 +42,66 @@ const Projects = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-1 gap-8">
+        <div className="grid lg:grid-cols-1 gap-10">
           {projects.map((project, index) => (
-            <Card key={index} className="p-8 bg-gradient-card border-border card-hover group">
-              <div className="grid lg:grid-cols-3 gap-8 items-center">
+            <Card key={index} className="relative p-8 bg-gradient-card border-border card-hover group overflow-hidden">
+              {/* Background Accent */}
+              <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${project.gradient} opacity-5 rounded-full blur-3xl`}></div>
+              
+              <div className="grid lg:grid-cols-3 gap-8 items-center relative z-10">
                 {/* Project Info */}
                 <div className="lg:col-span-2 space-y-6">
-                  <div className="flex items-center space-x-4">
-                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${project.gradient} flex items-center justify-center text-white shadow-lg`}>
-                      {project.icon}
+                  <div className="flex items-start space-x-6">
+                    <div className="relative group">
+                      <div className={`w-20 h-20 rounded-3xl bg-gradient-to-br ${project.gradient} flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform`}>
+                        {project.icon}
+                      </div>
+                      <div className={`absolute -inset-2 bg-gradient-to-br ${project.gradient} rounded-3xl opacity-20 blur-lg group-hover:opacity-40 transition-opacity`}></div>
                     </div>
-                    <div>
-                      <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
-                      <p className="text-muted-foreground leading-relaxed">
+                    <div className="flex-1">
+                      <h3 className="text-3xl font-bold mb-3 group-hover:text-primary transition-colors">{project.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed text-lg">
                         {project.description}
                       </p>
                     </div>
                   </div>
                   
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
+                  {/* Enhanced Tags */}
+                  <div className="flex flex-wrap gap-3">
                     {project.tags.map((tag, tagIndex) => (
                       <span
                         key={tagIndex}
-                        className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium"
+                        className="px-4 py-2 bg-primary/10 text-primary rounded-xl text-sm font-medium border border-primary/20 hover:bg-primary/20 transition-colors"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
                   
-                  {/* Action Buttons */}
+                  {/* Enhanced Action Buttons */}
                   <div className="flex gap-4">
-                    <Button className="btn-primary">
-                      <ExternalLink className="w-4 h-4 mr-2" />
+                    <Button className="btn-primary group">
+                      <ExternalLink className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform" />
                       Live Demo
                     </Button>
-                    <Button variant="outline" className="border-border bg-card/50 hover:bg-card">
-                      <Github className="w-4 h-4 mr-2" />
+                    <Button variant="outline" className="border-border bg-card/50 hover:bg-card hover:border-primary/50 group">
+                      <Github className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
                       Source Code
                     </Button>
                   </div>
                 </div>
                 
-                {/* Features */}
-                <div className="space-y-4">
-                  <h4 className="text-lg font-semibold">Key Features</h4>
-                  <div className="space-y-3">
+                {/* Enhanced Features */}
+                <div className="space-y-6">
+                  <h4 className="text-xl font-semibold flex items-center">
+                    <span className="w-1 h-6 bg-gradient-primary rounded-full mr-3"></span>
+                    Key Features
+                  </h4>
+                  <div className="space-y-4">
                     {project.features.map((feature, featureIndex) => (
-                      <div key={featureIndex} className="flex items-center space-x-3">
-                        <div className="w-2 h-2 bg-primary rounded-full"></div>
-                        <span className="text-muted-foreground">{feature}</span>
+                      <div key={featureIndex} className="flex items-center space-x-4 p-3 rounded-lg bg-card/30 border border-border/30 hover:border-primary/30 transition-colors">
+                        <div className="w-3 h-3 bg-gradient-primary rounded-full shadow-lg"></div>
+                        <span className="text-muted-foreground font-medium">{feature}</span>
                       </div>
                     ))}
                   </div>

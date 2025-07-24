@@ -59,33 +59,43 @@ const Achievements = () => {
           </p>
         </div>
 
-        {/* Stats Section */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+        {/* Enhanced Stats Section */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
           {stats.map((stat, index) => (
-            <Card key={index} className="p-6 bg-gradient-card border-border text-center card-hover">
-              <div className="text-3xl font-bold text-primary mb-2">{stat.number}</div>
-              <div className="font-semibold mb-1">{stat.label}</div>
-              <div className="text-sm text-muted-foreground">{stat.subtext}</div>
+            <Card key={index} className="relative p-8 bg-gradient-card border-border text-center card-hover group overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-primary opacity-5 group-hover:opacity-10 transition-opacity"></div>
+              <div className="relative z-10">
+                <div className="text-4xl font-bold text-primary mb-3 group-hover:scale-110 transition-transform">{stat.number}</div>
+                <div className="font-semibold mb-2 text-lg">{stat.label}</div>
+                <div className="text-sm text-muted-foreground leading-relaxed">{stat.subtext}</div>
+              </div>
+              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-primary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
             </Card>
           ))}
         </div>
 
-        {/* Achievements Grid */}
+        {/* Enhanced Achievements Grid */}
         <div className="grid md:grid-cols-2 gap-8">
           {achievements.map((achievement, index) => (
-            <Card key={index} className="p-6 bg-gradient-card border-border card-hover group">
-              <div className="flex items-start space-x-4">
-                <div className={`flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br ${achievement.gradient} flex items-center justify-center text-white shadow-lg`}>
-                  {achievement.icon}
+            <Card key={index} className="relative p-8 bg-gradient-card border-border card-hover group overflow-hidden">
+              <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${achievement.gradient} opacity-10 rounded-full blur-2xl group-hover:opacity-20 transition-opacity`}></div>
+              
+              <div className="flex items-start space-x-6 relative z-10">
+                <div className="relative group">
+                  <div className={`flex-shrink-0 w-20 h-20 rounded-3xl bg-gradient-to-br ${achievement.gradient} flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition-transform`}>
+                    {achievement.icon}
+                  </div>
+                  <div className={`absolute -inset-2 bg-gradient-to-br ${achievement.gradient} rounded-3xl opacity-20 blur-lg group-hover:opacity-40 transition-opacity`}></div>
                 </div>
+                
                 <div className="flex-1">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded-full font-medium">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <span className="text-xs px-3 py-2 bg-primary/10 text-primary rounded-xl font-semibold border border-primary/20">
                       {achievement.category}
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold mb-3">{achievement.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">{achievement.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed text-lg">
                     {achievement.description}
                   </p>
                 </div>

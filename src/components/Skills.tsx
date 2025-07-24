@@ -15,37 +15,64 @@ const Skills = () => {
     {
       title: "Programming Languages",
       icon: <Code className="w-6 h-6" />,
-      skills: ["Python", "Java", "JavaScript", "SQL"],
+      skills: [
+        { name: "Python", level: 90 },
+        { name: "Java", level: 85 },
+        { name: "JavaScript", level: 88 },
+        { name: "SQL", level: 80 }
+      ],
       color: "from-blue-500 to-cyan-500"
     },
     {
       title: "Web Technologies",
       icon: <Globe className="w-6 h-6" />,
-      skills: ["HTML", "CSS", "React.js", "Node.js", "Express.js"],
+      skills: [
+        { name: "HTML", level: 95 },
+        { name: "CSS", level: 90 },
+        { name: "React.js", level: 85 },
+        { name: "Node.js", level: 80 },
+        { name: "Express.js", level: 75 }
+      ],
       color: "from-green-500 to-emerald-500"
     },
     {
       title: "Databases",
       icon: <Database className="w-6 h-6" />,
-      skills: ["PostgreSQL", "MySQL"],
+      skills: [
+        { name: "PostgreSQL", level: 85 },
+        { name: "MySQL", level: 80 }
+      ],
       color: "from-purple-500 to-violet-500"
     },
     {
       title: "ML/AI Tools",
       icon: <Brain className="w-6 h-6" />,
-      skills: ["NumPy", "Pandas", "Matplotlib"],
+      skills: [
+        { name: "NumPy", level: 85 },
+        { name: "Pandas", level: 90 },
+        { name: "Matplotlib", level: 80 }
+      ],
       color: "from-orange-500 to-red-500"
     },
     {
       title: "Tools & Platforms",
       icon: <Settings className="w-6 h-6" />,
-      skills: ["Git", "GitHub", "Jupyter Notebook", "VS Code"],
+      skills: [
+        { name: "Git", level: 90 },
+        { name: "GitHub", level: 88 },
+        { name: "Jupyter Notebook", level: 85 },
+        { name: "VS Code", level: 95 }
+      ],
       color: "from-pink-500 to-rose-500"
     },
     {
       title: "Soft Skills",
       icon: <Users className="w-6 h-6" />,
-      skills: ["Leadership", "Communication", "Teamwork"],
+      skills: [
+        { name: "Leadership", level: 85 },
+        { name: "Communication", level: 90 },
+        { name: "Teamwork", level: 95 }
+      ],
       color: "from-teal-500 to-cyan-500"
     }
   ];
@@ -74,20 +101,19 @@ const Skills = () => {
                   <h3 className="text-lg font-semibold">{category.title}</h3>
                 </div>
                 
-                {/* Skills List */}
-                <div className="space-y-2">
+                {/* Skills List with Progress Bars */}
+                <div className="space-y-4">
                   {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex} className="flex items-center justify-between">
-                      <span className="text-muted-foreground">{skill}</span>
-                      <div className="flex space-x-1">
-                        {[...Array(5)].map((_, i) => (
-                          <div
-                            key={i}
-                            className={`w-2 h-2 rounded-full ${
-                              i < 4 ? 'bg-primary' : 'bg-muted'
-                            }`}
-                          />
-                        ))}
+                    <div key={skillIndex} className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">{skill.name}</span>
+                        <span className="text-xs text-primary font-bold">{skill.level}%</span>
+                      </div>
+                      <div className="w-full bg-muted/30 rounded-full h-2 overflow-hidden">
+                        <div 
+                          className={`h-full bg-gradient-to-r ${category.color} rounded-full transition-all duration-1000 ease-out`}
+                          style={{ width: `${skill.level}%` }}
+                        />
                       </div>
                     </div>
                   ))}

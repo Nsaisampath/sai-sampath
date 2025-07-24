@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { GraduationCap, Award, MapPin } from "lucide-react";
+import { GraduationCap, Award, MapPin, Code, BookOpen, Sparkles } from "lucide-react";
 
 const About = () => {
   const education = [
@@ -26,43 +26,83 @@ const About = () => {
     }
   ];
 
+  const highlights = [
+    { icon: <Code className="w-5 h-5" />, text: "3+ Years Coding Experience", color: "text-blue-400" },
+    { icon: <BookOpen className="w-5 h-5" />, text: "Machine Learning Certified", color: "text-green-400" },
+    { icon: <Sparkles className="w-5 h-5" />, text: "Full-Stack Developer", color: "text-purple-400" }
+  ];
+
   return (
-    <section id="about" className="section-padding">
-      <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            About <span className="text-gradient">Me</span>
+    <section id="about" className="section-padding relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-primary rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-accent rounded-full blur-3xl"></div>
+      </div>
+      
+      <div className="container mx-auto max-w-6xl relative">
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full mb-6">
+            <Sparkles className="w-4 h-4 text-primary mr-2" />
+            <span className="text-primary font-semibold">About Me</span>
+          </div>
+          <h2 className="text-5xl md:text-6xl font-bold mb-6">
+            Creating Digital <span className="text-gradient">Solutions</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Passionate about technology and innovation, driven by curiosity and a desire to create meaningful solutions.
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Passionate technology enthusiast with a vision to solve real-world problems through innovative software solutions and AI-driven applications.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left side - Profile and Bio */}
-          <div className="space-y-6">
-            <div className="relative">
-              <div className="w-80 h-80 mx-auto lg:mx-0 rounded-2xl bg-gradient-card border border-border overflow-hidden card-hover">
-                <div className="w-full h-full bg-muted flex items-center justify-center">
-                  <span className="text-6xl font-bold text-primary">SS</span>
+          <div className="space-y-8">
+            {/* Enhanced Profile Section */}
+            <div className="relative group">
+              <div className="absolute -inset-4 bg-gradient-primary rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity"></div>
+              <div className="relative w-80 h-80 mx-auto lg:mx-0 rounded-3xl bg-gradient-card border border-border/50 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20"></div>
+                <div className="w-full h-full flex items-center justify-center relative z-10">
+                  <span className="text-7xl font-bold text-primary drop-shadow-lg">SS</span>
                 </div>
+                {/* Floating Elements */}
+                <div className="absolute top-4 right-4 w-8 h-8 bg-primary/20 rounded-full blur-sm animate-pulse"></div>
+                <div className="absolute bottom-6 left-6 w-6 h-6 bg-accent/30 rounded-full blur-sm animate-pulse delay-100"></div>
               </div>
-              <div className="absolute -inset-2 bg-gradient-primary rounded-2xl blur opacity-20"></div>
             </div>
             
-            <div className="space-y-4">
-              <h3 className="text-2xl font-bold">Hello! I'm Sai Sampath</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                A dedicated B.Tech Information Technology student with a passion for software development and artificial intelligence. 
-                I believe in the power of technology to solve real-world problems and create positive impact.
+            {/* Bio Section with Enhanced Typography */}
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-3xl font-bold mb-2 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text">
+                  Hello! I'm Sai Sampath
+                </h3>
+                <div className="w-16 h-1 bg-gradient-primary rounded-full"></div>
+              </div>
+              
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                A dedicated <span className="text-primary font-semibold">B.Tech Information Technology</span> student with an unwavering passion for software development and artificial intelligence. I believe in the transformative power of technology to solve complex real-world problems.
               </p>
-              <p className="text-muted-foreground leading-relaxed">
-                During my AI/ML internship at Google via Eduskills, I built 3 machine learning models and gained hands-on 
-                experience with real datasets, strengthening my foundation in data science and machine learning.
+              
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                During my <span className="text-primary font-semibold">AI/ML internship at Google</span> via Eduskills, I built 3 machine learning models and gained invaluable hands-on experience with real datasets, significantly strengthening my foundation in data science.
               </p>
-              <div className="flex items-center text-primary">
-                <MapPin className="w-5 h-5 mr-2" />
-                <span>Andhra Pradesh, India</span>
+              
+              {/* Quick Highlights */}
+              <div className="space-y-3">
+                {highlights.map((highlight, index) => (
+                  <div key={index} className="flex items-center space-x-3 p-3 rounded-lg bg-card/30 border border-border/30">
+                    <div className={`${highlight.color}`}>
+                      {highlight.icon}
+                    </div>
+                    <span className="text-muted-foreground">{highlight.text}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="flex items-center text-primary bg-primary/5 p-3 rounded-lg border border-primary/10">
+                <MapPin className="w-5 h-5 mr-3" />
+                <span className="font-medium">Andhra Pradesh, India</span>
               </div>
             </div>
           </div>
